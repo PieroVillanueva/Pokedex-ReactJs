@@ -1,5 +1,8 @@
 import React from "react";
 import ListarTipos from "./ListarTipos";
+import Barra from "./Barra";
+import { convertirNombre } from "../js/utility";
+
 export default function Modal({ poke, handleCerrarModal }) {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center  ">
@@ -12,7 +15,9 @@ export default function Modal({ poke, handleCerrarModal }) {
             X
           </button>
         </div>
-        <h3 className="text-center">{`${poke.name} #${poke.id}`}</h3>
+        <h3 className="text-center">{`${convertirNombre(poke.name)} #${
+          poke.id
+        }`}</h3>
         <img
           src={poke.sprites.other["official-artwork"].front_default}
           alt={`Imagen de ${poke.name}`}
@@ -27,12 +32,15 @@ export default function Modal({ poke, handleCerrarModal }) {
         <p>
           Vida: <span>{poke.stats[0].base_stat}</span>
         </p>
+        <Barra valor={poke.stats[0].base_stat} stat={"vida"} />
         <p>
           Ataque: <span>{poke.stats[1].base_stat}</span>
         </p>
+        <Barra valor={poke.stats[1].base_stat} stat={"ataque"} />
         <p>
           Defensa: <span>{poke.stats[2].base_stat}</span>
         </p>
+        <Barra valor={poke.stats[2].base_stat} stat={"defensa"} />
       </div>
     </div>
   );

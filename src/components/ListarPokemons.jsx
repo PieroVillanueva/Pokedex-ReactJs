@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ListarTipos from "./ListarTipos";
+import { convertirNombre } from "../js/utility";
 
 export function ListarPokemons({ pokemons, handleMostrarModal }) {
   return pokemons.map((poke) => (
@@ -11,7 +12,9 @@ export function ListarPokemons({ pokemons, handleMostrarModal }) {
         handleMostrarModal(poke);
       }}
     >
-      <h3 className="text-center">{`${poke.name} #${poke.id}`}</h3>
+      <h3 className="text-center">{`${convertirNombre(poke.name)} #${
+        poke.id
+      }`}</h3>
       <img
         src={poke.sprites.other["official-artwork"].front_default}
         alt={`Imagen de ${poke.name}`}
