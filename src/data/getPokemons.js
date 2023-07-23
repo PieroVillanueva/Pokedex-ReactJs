@@ -37,7 +37,7 @@ export const getAllPokemones = async ({ search, setPokemons, setIsLoading }) => 
     const response = await fetch(
       `https://pokeapi.co/api/v2/pokemon/${search}`
     );
-    if (!response.ok) return
+    if (!response.ok) { setIsLoading(false); return }
     const data = await response.json();
     setPokemons([data]);
     setIsLoading(false);
