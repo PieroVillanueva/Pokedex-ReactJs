@@ -77,15 +77,6 @@ function App() {
           No se encontraron pokemons con ese nombre
         </h1>
       )}
-
-      {/*<footer className="flex justify-center my-8">
-        <button
-          className="bg-yellow-500 text-white rounded-xl px-5 py-3 w-1/5 md:w-auto"
-          onClick={handleSiguiente}
-        >
-          Cargar más
-        </button>
-      </footer>*/}
     </>
   );
 }
