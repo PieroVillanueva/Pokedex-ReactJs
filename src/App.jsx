@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import { Header } from "./components/Header";
-import { getPokemones, getAllPokemones } from "./data/getPokemons";
+import {
+  getPokemones,
+  getPokemonByNameOrNumber,
+  getAllPokemon,
+} from "./data/getPokemons";
 import { ListarPokemons } from "./components/ListarPokemons";
 import Modal from "./components/Modal";
 import "./loader.css";
@@ -15,6 +19,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [mostrarModal, setMostrarModal] = useState(false);
   const [pokeModal, setPokeModal] = useState({});
+  const [todosPokemons, setTodosPokemons] = useState([]);
 
   const handleSiguiente = () => {
     setOffset((prevState) => prevState + 20);
@@ -59,9 +64,16 @@ function App() {
       setPokemons([]);
       setOffset(-1);
       setExisteSiguiente(true);
-      getAllPokemones({ search, setPokemons, setIsLoading });
+      getPokemonByNameOrNumber({ search, setPokemons, setIsLoading });
     }
   }, [search]);
+
+  /*
+  useEffect(() => {
+    setTimeout(() => {
+      getAllPokemon({ setTodosPokemons: setPokemons, setExisteSiguiente });
+    }, 5000);
+  }, []);*/
 
   const handleMostrarModal = (poke) => {
     setMostrarModal(true);

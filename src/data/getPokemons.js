@@ -31,7 +31,7 @@ export const getPokemones = async ({
   setPokemons((prevState) => [...prevState, ...resultadoFinal]);
   setIsLoading(false);
 };
-export const getAllPokemones = async ({ search, setPokemons, setIsLoading }) => {
+export const getPokemonByNameOrNumber = async ({ search, setPokemons, setIsLoading }) => {
   try {
     setIsLoading(true);
     const response = await fetch(
@@ -47,4 +47,23 @@ export const getAllPokemones = async ({ search, setPokemons, setIsLoading }) => 
     console.log(er)
   }
 
+};
+export const getAllPokemon = async ({ setTodosPokemons, setExisteSiguiente }) => {
+  const response = await fetch(
+    `https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0`
+  );
+  const data = await response.json();
+
+  const promises = data.results.map(async (poke) => {
+    const result = await fetch(
+      `https://pokeapi.co/api/v2/pokemon/${poke.name}`
+    );
+    const pokemon = await result.json();
+    return pokemon;
+  });
+
+  const resultadoFinal = await Promise.all(promises);
+
+  setTodosPokemons(resultadoFinal);
+  setExisteSiguiente(false);
 };
