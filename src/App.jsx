@@ -40,6 +40,7 @@ function App() {
 
   useEffect(() => {
     if (offset < 0) return;
+
     getPokemones({
       newOffset: offset,
       existeSiguiente,

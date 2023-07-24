@@ -4,10 +4,10 @@ export const getPokemones = async ({
   setExisteSiguiente,
   setPokemons, setIsLoading
 }) => {
-  setIsLoading(true);
-  if (!existeSiguiente) return;
 
-  console.log("consulte")
+  if (!existeSiguiente) return;
+  setIsLoading(true);
+  console.log("consulte", newOffset)
   const response = await fetch(
     `https://pokeapi.co/api/v2/pokemon/?offset=${newOffset}&limit=20`
   );
