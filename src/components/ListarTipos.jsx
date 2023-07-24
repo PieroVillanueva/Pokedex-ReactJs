@@ -47,7 +47,7 @@ export default function ListarTipos({ tipos }) {
         <p
           key={tipo.slot}
           style={{ backgroundColor: `${coloresTipos[tipo.type.name]}` }}
-          className={`p-2 rounded-xl text-white`}
+          className={`p-1 xl:p-2 rounded-xl text-white`}
         >
           {nombresTipos[tipo.type.name]}
         </p>

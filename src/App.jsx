@@ -4,6 +4,7 @@ import { getPokemones, getAllPokemones } from "./data/getPokemons";
 import { ListarPokemons } from "./components/ListarPokemons";
 import Modal from "./components/Modal";
 import "./loader.css";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 function App() {
   const [search, setSearch] = useState("");
@@ -18,6 +19,7 @@ function App() {
   const handleSiguiente = () => {
     setOffset((prevState) => prevState + 20);
   };
+
   const reinicioMostrarTodos = () => {
     setPokemons((prevState) => (prevState.length <= 1 ? [] : prevState));
     setSearch("");
@@ -25,6 +27,7 @@ function App() {
     setRealizoBusqueda(false);
   };
 
+  /*
   const handleScroll = () => {
     if (
       window.innerHeight + document.documentElement.scrollTop + 1 >=
@@ -35,8 +38,8 @@ function App() {
   };
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-  }, []);
+    //window.addEventListener("scroll", handleScroll);
+  }, []);*/
 
   useEffect(() => {
     if (offset < 0) return;
@@ -78,12 +81,18 @@ function App() {
       ></Header>
 
       {pokemons.length > 0 ? (
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4  xl:grid-cols-5 gap-3 max-w-[85%] m-auto mb-8">
-          <ListarPokemons
-            pokemons={pokemons}
-            handleMostrarModal={handleMostrarModal}
-          />
-        </div>
+        <InfiniteScroll
+          dataLength={pokemons.length}
+          next={handleSiguiente}
+          hasMore={existeSiguiente}
+        >
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4  xl:grid-cols-5 gap-3 max-w-[85%] m-auto mb-8 pt-5">
+            <ListarPokemons
+              pokemons={pokemons}
+              handleMostrarModal={handleMostrarModal}
+            />
+          </div>
+        </InfiniteScroll>
       ) : isLoading ? (
         <div className="m-auto flex justify-center mt-10">
           <span className="loader"></span>

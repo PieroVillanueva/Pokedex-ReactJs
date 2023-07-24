@@ -15,7 +15,7 @@ export const Header = ({
   };
 
   return (
-    <header className="flex items-center flex-col mb-5">
+    <header className="flex items-center flex-col  animate-fade animate-once">
       <h1 className="text-5xl my-5 block text-sky-600 uppercase font-bold">
         Pokedex
       </h1>
