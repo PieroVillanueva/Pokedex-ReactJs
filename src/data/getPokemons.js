@@ -1,22 +1,11 @@
 export const getPokemones = async ({
-  newOffset,
-  existeSiguiente,
-  setExisteSiguiente,
   setPokemons, setIsLoading
 }) => {
-
-  if (!existeSiguiente) return;
   setIsLoading(true);
-  console.log("consulte", newOffset)
   const response = await fetch(
-    `https://pokeapi.co/api/v2/pokemon/?offset=${newOffset}&limit=20`
+    `https://pokeapi.co/api/v2/pokemon?limit=100&offset=0`
   );
   const data = await response.json();
-
-  if (data.next == null) {
-    setExisteSiguiente(false);
-    return;
-  }
 
   const promises = data.results.map(async (poke) => {
     const result = await fetch(
@@ -28,9 +17,10 @@ export const getPokemones = async ({
 
   const resultadoFinal = await Promise.all(promises);
 
-  setPokemons((prevState) => [...prevState, ...resultadoFinal]);
+  setPokemons(resultadoFinal);
   setIsLoading(false);
 };
+/*
 export const getPokemonByNameOrNumber = async ({ search, setPokemons, setIsLoading }) => {
   try {
     setIsLoading(true);
@@ -47,23 +37,30 @@ export const getPokemonByNameOrNumber = async ({ search, setPokemons, setIsLoadi
     console.log(er)
   }
 
-};
-export const getAllPokemon = async ({ setTodosPokemons, setExisteSiguiente }) => {
-  const response = await fetch(
-    `https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0`
-  );
-  const data = await response.json();
+};*/
+export const getAllPokemon = async ({ setTodosPokemons, setSeCargoTodos, setIsLoading }) => {
+  try {
 
-  const promises = data.results.map(async (poke) => {
-    const result = await fetch(
-      `https://pokeapi.co/api/v2/pokemon/${poke.name}`
+    setIsLoading(true);
+    const response = await fetch(
+      `https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0`
     );
-    const pokemon = await result.json();
-    return pokemon;
-  });
+    const data = await response.json();
 
-  const resultadoFinal = await Promise.all(promises);
+    const promises = data.results.map(async (poke) => {
+      const result = await fetch(
+        `https://pokeapi.co/api/v2/pokemon/${poke.name}`
+      );
+      const pokemon = await result.json();
+      return pokemon;
+    });
 
-  setTodosPokemons(resultadoFinal);
-  setExisteSiguiente(false);
+    const resultadoFinal = await Promise.all(promises);
+
+    setTodosPokemons(resultadoFinal);
+    setSeCargoTodos(true);
+    setIsLoading(false);
+  } catch (e) {
+    console.log(e)
+  }
 };

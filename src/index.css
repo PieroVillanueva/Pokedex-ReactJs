@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Open+Sans&family=PT+Sans:wght@400;700&display=swap');
+
+@font-face {
+    font-family: 'Berlin Sans FB Demi Bold';
+    src: local('Berlin Sans FB Demi Bold'), url("../src/fonts/BRLNSDB.TTF") format('ttf');
+  }
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

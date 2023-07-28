@@ -1,5 +1,5 @@
 import React from "react";
-const coloresTipos = {
+export const coloresTipos = {
   bug: "#879921",
   dark: "#4a3a3a",
   dragon: "#4f5ad8",
@@ -19,7 +19,7 @@ const coloresTipos = {
   steel: "#5e97b2",
   water: "#327be4",
 };
-const nombresTipos = {
+export const nombresTipos = {
   bug: "Bicho",
   dark: "Siniestro",
   dragon: "Dragón",
@@ -40,17 +40,26 @@ const nombresTipos = {
   water: "Agua",
 };
 
-export default function ListarTipos({ tipos }) {
+export default function ListarTipos({ tipos, pokeModal }) {
   return (
     <>
       {tipos.map((tipo) => (
-        <p
-          key={tipo.slot}
-          style={{ backgroundColor: `${coloresTipos[tipo.type.name]}` }}
-          className={`p-1 xl:p-2 rounded-xl text-white`}
-        >
-          {nombresTipos[tipo.type.name]}
-        </p>
+        <div key={tipo.slot} className="flex gap-x-1 ">
+          <div
+            style={{ backgroundColor: `${coloresTipos[tipo.type.name]}` }}
+            className={`rounded-full w-3 h-3 m-auto ${pokeModal && "mr-0.5"}`}
+          ></div>
+          <p
+            //style={{ backgroundColor: `${coloresTipos[tipo.type.name]}` }}
+            className={
+              `rounded-xl  m-auto text-xs ${
+                pokeModal ? "md:text-base" : "xl:text-base"
+              } mr-2` /*p-1 xl:p-2 */
+            }
+          >
+            {nombresTipos[tipo.type.name]}
+          </p>
+        </div>
       ))}
     </>
   );

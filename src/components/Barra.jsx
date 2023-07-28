@@ -1,13 +1,13 @@
 import React from "react";
-const coloresStats = {
-  vida: "#01dc01",
-  ataque: "#d85304",
-  defensa: "#444751",
+export const coloresStats = {
+  vida: "#8cb92c",
+  ataque: "#de6f17",
+  defensa: "#3d4049",
 };
 
 export default function Barra({ valor, stat }) {
   return (
-    <div className="w-full bg-gray-400 rounded-full h-2.5">
+    <div className="w-5/6 my-auto bg-[#e6ede5] rounded-full h-2.5">
       <div
         style={{
           width: `${valor / 3}%`,

@@ -8,7 +8,14 @@ export default {
     extend: {
       screens: {
         'tall': { 'raw': '(min-height: 500px)' },
-        // => @media (min-height: 800px) { ... }
+        // => @media (min-height: 500px) { ... }
+      },
+      fontFamily: {
+        "lato": ['Lato', 'sans-serif'],
+        "berlin": ["Berlin Sans FB Demi Bold", 'sans-serif'],
+      },
+      backgroundImage: {
+        "trama": "url('../src/img/trama.png')"
       }
     },
   },
